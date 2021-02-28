@@ -38,6 +38,7 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btgGioiTinh = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         pnlCapNhat = new javax.swing.JPanel();
         pnlTextField = new javax.swing.JPanel();
@@ -77,6 +78,25 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
         tblNguoiHoc = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
 
+        setTitle("NGƯỜI HỌC");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
+
         lblMaNH.setText("Mã người học");
 
         lblHoTen.setText("Họ và tên");
@@ -85,9 +105,11 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
 
         lblNgaySinh.setText("Ngày sinh");
 
+        btgGioiTinh.add(rdoMale);
         rdoMale.setSelected(true);
         rdoMale.setText("Nam");
 
+        btgGioiTinh.add(rdoFemale);
         rdoFemale.setText("Nữ");
 
         lblDienThoai.setText("Điện thoại");
@@ -464,7 +486,13 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
         System.out.println("2");
     }//GEN-LAST:event_pnlDanhSachFocusGained
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formInternalFrameOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btgGioiTinh;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFirst;
@@ -504,6 +532,10 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        this.load();
+    }
 
     private void load() {
         DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
@@ -618,13 +650,11 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
         txtMaNH.setText(model.getMaNH());
         txtHoTen.setText(model.getHoTen());
         rdoMale.setSelected(model.isGioiTinh());
+        rdoFemale.setSelected(!model.isGioiTinh());
         txtNgaySinh.setText(XDate.toString(model.getNgaySinh()));
         txtDienThoai.setText(model.getDienThoai());
         txtEmail.setText(model.getEmail());
         txtGhiChu.setText(model.getGhiChu());
     }
 
-    private void init() {
-        this.load();
-    }
 }

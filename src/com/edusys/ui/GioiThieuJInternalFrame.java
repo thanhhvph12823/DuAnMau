@@ -31,6 +31,8 @@ public class GioiThieuJInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+        setTitle("GIỚI THIỆU");
+
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icon/logo-small.png"))); // NOI18N
 
         jTextArea1.setColumns(20);

@@ -25,10 +25,10 @@ public class ThongKeDAO {
                 rs = JDBCHelper.executeQuery(sql);
                 while (rs.next()) {
                     Object[] model = {
-                        rs.getInt("Nam"),
-                        rs.getInt("SoLuong"),
-                        rs.getDate("DauTien"),
-                        rs.getDate("CuoiCung")
+                        rs.getInt("NAM"),
+                        rs.getInt("SOLUONG"),
+                        rs.getDate("DAUTIEN"),
+                        rs.getDate("CUOIDUNG")
                     };
                     list.add(model);
                 }

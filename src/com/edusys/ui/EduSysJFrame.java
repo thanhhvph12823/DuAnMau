@@ -407,7 +407,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        // TODO add your handling code here:
+        executeDangXuat();
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
@@ -439,7 +439,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDangNhapActionPerformed
 
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
-        DangXuat();
+        executeDangXuat();
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
@@ -690,7 +690,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
         this.jDesktopPane1.add(DMKIF);
     }
 
-    private void DangXuat() {
+    private void executeDangXuat() {
         closeAllFrame();
         ShareHelper.logoff();
         openDangNhap();

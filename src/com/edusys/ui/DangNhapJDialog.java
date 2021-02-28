@@ -11,6 +11,7 @@ import com.edusys.utils.DialogHelper;
 import com.edusys.utils.ShareHelper;
 import com.edusys.utils.XImage;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -48,6 +49,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         setTitle("EduSys - Đăng nhập");
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
+        setUndecorated(true);
 
         lblLogo.setBackground(new java.awt.Color(255, 255, 255));
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -56,6 +58,12 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         lblMaNV.setText("Tên đăng nhập");
 
         lblMatKhau.setText("Mật khẩu");
+
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
 
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icon/Key.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
@@ -133,6 +141,12 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
         exit();
     }//GEN-LAST:event_btnKetThucActionPerformed
+
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
 
     /**
      * @param args the command line arguments
@@ -221,4 +235,5 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             System.exit(0);
         }
     }
+
 }

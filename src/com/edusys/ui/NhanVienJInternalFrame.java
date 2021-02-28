@@ -69,6 +69,25 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         tblGridView = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
 
+        setTitle("NHÂN VIÊN");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
+
         pnlTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlTextField.setLayout(new java.awt.GridLayout(10, 1));
 
@@ -228,7 +247,15 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
             new String [] {
                 "MÃ NV", "MẬT KHẨU", "HỌ TÊN", "VAI TRÒ"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblGridView.setRowHeight(22);
         tblGridView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -328,6 +355,11 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
         this.index = tblGridView.getRowCount() - 1;
         this.edit();
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.load();
+        this.setStatus(true);
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

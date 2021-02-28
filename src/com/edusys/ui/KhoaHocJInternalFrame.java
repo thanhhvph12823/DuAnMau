@@ -44,14 +44,12 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlTenCD = new javax.swing.JPanel();
-        cboChuyenDe = new javax.swing.JComboBox<>();
         tabs = new javax.swing.JTabbedPane();
         pnlCapNhat = new javax.swing.JPanel();
         pnlTextField = new javax.swing.JPanel();
         lblTenCD = new javax.swing.JLabel();
         lblNgayKG = new javax.swing.JLabel();
-        txtTenCD = new javax.swing.JTextField();
+        cboChuyenDe = new javax.swing.JComboBox<>();
         txtNgayKG = new javax.swing.JTextField();
         lblHocPhi = new javax.swing.JLabel();
         lblThoiLuong = new javax.swing.JLabel();
@@ -80,6 +78,7 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
 
+        setTitle("QUẢN LÝ KHÓA HỌC");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -98,17 +97,6 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        pnlTenCD.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "CHUYÊN ĐỀ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 0))); // NOI18N
-        pnlTenCD.setLayout(new java.awt.GridLayout(1, 0));
-
-        cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboChuyenDe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboChuyenDeActionPerformed(evt);
-            }
-        });
-        pnlTenCD.add(cboChuyenDe);
-
         pnlTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlTextField.setLayout(new java.awt.GridLayout(6, 2, 10, 10));
 
@@ -118,8 +106,8 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         lblNgayKG.setText("Khai giảng");
         pnlTextField.add(lblNgayKG);
 
-        txtTenCD.setForeground(new java.awt.Color(255, 0, 0));
-        pnlTextField.add(txtTenCD);
+        cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pnlTextField.add(cboChuyenDe);
         pnlTextField.add(txtNgayKG);
 
         lblHocPhi.setText("Học phí");
@@ -263,22 +251,32 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(pnlTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         tabs.addTab("CẬP NHẬT", pnlCapNhat);
 
+        pnlDanhSach.setLayout(new java.awt.BorderLayout());
+
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "MÃ KH", "THỜI LƯỢNG", "HỌC PHÍ", "KHAI GIẢNG", "TẠO BỞI", "NGÀY TẠO"
+                "MÃ KH", "CHUYÊN ĐỀ", "THỜI LƯỢNG", "HỌC PHÍ", "KHAI GIẢNG", "TẠO BỞI", "NGÀY TẠO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblGridView.setRowHeight(22);
         tblGridView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -288,40 +286,11 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblGridView);
 
-        javax.swing.GroupLayout pnlDanhSachLayout = new javax.swing.GroupLayout(pnlDanhSach);
-        pnlDanhSach.setLayout(pnlDanhSachLayout);
-        pnlDanhSachLayout.setHorizontalGroup(
-            pnlDanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDanhSachLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
-        );
-        pnlDanhSachLayout.setVerticalGroup(
-            pnlDanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-        );
+        pnlDanhSach.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         tabs.addTab("DANH SÁCH", pnlDanhSach);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabs)
-                    .addComponent(pnlTenCD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlTenCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs))
-        );
+        getContentPane().add(tabs, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -379,10 +348,6 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         this.edit();
     }//GEN-LAST:event_btnLastActionPerformed
 
-    private void cboChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuyenDeActionPerformed
-        selectComboBox();
-    }//GEN-LAST:event_cboChuyenDeActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -408,7 +373,6 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlDanhSach;
     private javax.swing.JPanel pnlFunctBtn;
     private javax.swing.JPanel pnlNavBtn;
-    private javax.swing.JPanel pnlTenCD;
     private javax.swing.JPanel pnlTextArea;
     private javax.swing.JPanel pnlTextField;
     private javax.swing.JTabbedPane tabs;
@@ -418,12 +382,10 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtNgayKG;
     private javax.swing.JTextField txtNgayTao;
-    private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
 
     private void init() {
-
     }
 
     private void fillComboBox() {
@@ -531,6 +493,7 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         model.setMaNV(ShareHelper.USER.getMaNV());
         model.setNgayKG(XDate.add(30));
         model.setNgayTao(XDate.now());
+        this.setStatus(true);
         this.setModel(model);
     }
 

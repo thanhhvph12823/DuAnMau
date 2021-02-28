@@ -5,11 +5,28 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.HocVienDAO;
+import com.edusys.dao.NguoiHocDAO;
+import com.edusys.entity.HocVien;
+import com.edusys.entity.NguoiHoc;
+import com.edusys.utils.DialogHelper;
+import com.edusys.utils.JDBCHelper;
+import com.edusys.utils.ShareHelper;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+
 /**
  *
  * @author thanhhvph12823
  */
 public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
+
+    public Integer MaKH;
+    HocVienDAO dao = new HocVienDAO();
+    NguoiHocDAO nhdao = new NguoiHocDAO();
 
     /**
      * Creates new form HocVienJDialogJInternalFrame
@@ -17,7 +34,7 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
     public HocVienJInternalFrame() {
         initComponents();
         init();
-//        this.MaKH = MaKH;
+        this.MaKH = MaKH;
     }
 
     /**
@@ -44,14 +61,36 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         btnCapNhat = new javax.swing.JButton();
 
         setTitle("QUẢN LÝ HỌC VIÊN KHÓA HỌC");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         pnlHVKhac.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "HỌC VIÊN KHÁC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
 
         cboNguoiHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHVKhacLayout = new javax.swing.GroupLayout(pnlHVKhac);
         pnlHVKhac.setLayout(pnlHVKhacLayout);
@@ -90,20 +129,47 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblGridView);
 
         rdoTatCa.setText("Tất cả");
+        rdoTatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoTatCaActionPerformed(evt);
+            }
+        });
 
         rdoDaNhap.setText("Đã nhập điểm");
+        rdoDaNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoDaNhapActionPerformed(evt);
+            }
+        });
 
         rdoChuaNhap.setText("Chưa nhập điểm");
+        rdoChuaNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoChuaNhapActionPerformed(evt);
+            }
+        });
 
         btnCapNhat.setText("Cập nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHVKHLayout = new javax.swing.GroupLayout(pnlHVKH);
         pnlHVKH.setLayout(pnlHVKHLayout);
@@ -159,6 +225,31 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.fillComboBox();
+        this.load();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        add();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void rdoTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTatCaActionPerformed
+        this.load();
+    }//GEN-LAST:event_rdoTatCaActionPerformed
+
+    private void rdoDaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDaNhapActionPerformed
+        this.load();
+    }//GEN-LAST:event_rdoDaNhapActionPerformed
+
+    private void rdoChuaNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChuaNhapActionPerformed
+        this.load();
+    }//GEN-LAST:event_rdoChuaNhapActionPerformed
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        update();
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgrPhanLoai;
@@ -177,6 +268,84 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setFrameIcon((Icon) ShareHelper.APP_ICON);
+    }
+
+    private void fillComboBox() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNguoiHoc.getModel();
+        model.removeAllElements();
+        try {
+            List<NguoiHoc> list = nhdao.selectByCourse(MaKH);
+            for (NguoiHoc nh : list) {
+                model.addElement(nh);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn học viên!");
+        }
+    }
+
+    private void load() {
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        try {
+            String sql = "SELECT hv.*, nh.HoTen FROM HocVien hv "
+                    + " JOIN NguoiHoc nh ON nh.MaNH=hv.MaNH WHERE MaKH=?";
+            ResultSet rs = JDBCHelper.executeQuery(sql, MaKH);
+            while (rs.next()) {
+                double diem = rs.getDouble("Diem");
+                Object[] row = {rs
+                    .getInt("MaHV"),
+                    rs.getString("MaNH"),
+                    rs.getString("HoTen"), diem,
+                    false
+                };
+                if (rdoTatCa.isSelected()) {
+                    model.addRow(row);
+                } else if (rdoDaNhap.isSelected() && diem >= 0) {
+                    model.addRow(row);
+                } else if (rdoChuaNhap.isSelected() && diem < 0) {
+                    model.addRow(row);
+                }
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn học viên!");
+        }
+    }
+
+    private void add() {
+        NguoiHoc nguoiHoc = (NguoiHoc) cboNguoiHoc.getSelectedItem();
+        HocVien model = new HocVien();
+        model.setMaKH(MaKH);
+        model.setMaNH(nguoiHoc.getMaNH());
+        model.setDiem(Double.valueOf(txtDiem.getText()));
+        try {
+            dao.insert(model);
+            this.fillComboBox();
+            this.load();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi thêm học viên vào khóa học!");
+        }
+    }
+
+    private void update() {
+        for (int i = 0; i < tblGridView.getRowCount(); i++) {
+            Integer mahv = (Integer) tblGridView.getValueAt(i, 0);
+            String manh = (String) tblGridView.getValueAt(i, 1);
+            Double diem = (Double) tblGridView.getValueAt(i, 3);
+            Boolean isDelete = (Boolean) tblGridView.getValueAt(i, 4);
+            if (isDelete) {
+                dao.delete(mahv);
+            } else {
+                HocVien model = new HocVien();
+                model.setMaHV(mahv);
+                model.setMaKH(MaKH);
+                model.setMaNH(manh);
+                model.setDiem(diem);
+                dao.update(model);
+            }
+        }
+        this.fillComboBox();
+        this.load();
+        DialogHelper.alert(this, "Cập nhật thành công!");
     }
 }

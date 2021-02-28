@@ -16,6 +16,7 @@ public class DoiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
      */
     public DoiMatKhauJInternalFrame() {
         initComponents();
+        init();
     }
 
     /**
@@ -38,6 +39,8 @@ public class DoiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
         txtMatKhau = new javax.swing.JPasswordField();
         txtMatKhau1 = new javax.swing.JPasswordField();
         txtMatKhau2 = new javax.swing.JPasswordField();
+
+        setTitle("ĐỔI MẬT KHẨU");
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 102, 0));
@@ -135,4 +138,8 @@ public class DoiMatKhauJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField txtMatKhau1;
     private javax.swing.JPasswordField txtMatKhau2;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+
+    }
 }
