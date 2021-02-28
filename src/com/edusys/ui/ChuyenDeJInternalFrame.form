@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
-  </Properties>
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,11 +19,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tabs" max="32767" attributes="0"/>
-                  <Component id="pnlTenCD" max="32767" attributes="0"/>
+                  <Component id="tabs" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -37,50 +36,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlTenCD" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="tabs" pref="374" max="32767" attributes="0"/>
+              <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tabs" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="pnlTenCD">
+    <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder position="1" title="CHUY&#xca;N &#x110;&#x1ec0;">
-              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-                <BevelBorder bevelType="1"/>
-              </Border>
-              <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
-            </TitledBorder>
-          </Border>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; CHUY&#xca;N &#x110;&#x1ec0;"/>
       </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="0"/>
-        <Property name="rows" type="int" value="1"/>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JComboBox" name="cboChuyenDe">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
+    </Component>
     <Container class="javax.swing.JTabbedPane" name="tabs">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -101,8 +75,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="pnlTextArea" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="pnlLogo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pnlTextField" max="32767" attributes="0"/>
+                          </Group>
                           <Component id="pnlButton" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pnlTextField" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -112,7 +90,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlTextField" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pnlTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pnlLogo" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlTextArea" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -123,6 +104,41 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Container class="javax.swing.JPanel" name="pnlLogo">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder justification="1" position="1" title="H&#xec;nh Logo">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="66" green="0" red="0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblAnh" alignment="0" pref="116" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblAnh" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblAnh">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAnhMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
             <Container class="javax.swing.JPanel" name="pnlTextField">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -133,61 +149,37 @@
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                <Property name="columns" type="int" value="2"/>
-                <Property name="horizontalGap" type="int" value="10"/>
-                <Property name="rows" type="int" value="6"/>
-                <Property name="verticalGap" type="int" value="10"/>
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="8"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblTenCD">
+                <Component class="javax.swing.JLabel" name="lblMaCD">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Chuy&#xea;n &#x111;&#x1ec1;"/>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; chuy&#xea;n &#x111;&#x1ec1;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblNgayKG">
+                <Component class="javax.swing.JTextField" name="txtMaCD">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTenCD">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Khai gi&#x1ea3;ng"/>
+                    <Property name="text" type="java.lang.String" value="T&#xea;n chuy&#xea;n &#x111;&#x1ec1;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTenCD">
-                  <Properties>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="ff" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtNgayKG">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayKGActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblHocPhi">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="H&#x1ecd;c ph&#xed;"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblThoiLuong">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#x1edd;i l&#x1b0;&#x1ee3;ng (gi&#x1edd;)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtHocPhi">
-                </Component>
                 <Component class="javax.swing.JTextField" name="txtThoiLuong">
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblMaNV">
+                <Component class="javax.swing.JLabel" name="lblHocPhi">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ng&#x1b0;&#x1edd;i t&#x1ea1;o"/>
+                    <Property name="text" type="java.lang.String" value="H&#x1ecd;c ph&#xed;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblNgayTao">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Ng&#xe0;y t&#x1ea1;o"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtMaNV">
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtNgayTao">
+                <Component class="javax.swing.JTextField" name="txtHocPhi">
                 </Component>
               </SubComponents>
             </Container>
@@ -208,7 +200,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblGhiChu" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMoTa" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -220,7 +212,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblGhiChu" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMoTa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane1" pref="66" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -229,9 +221,9 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblGhiChu">
+                <Component class="javax.swing.JLabel" name="lblMoTa">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ghi ch&#xfa;"/>
+                    <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3; chuy&#xea;n &#x111;&#x1ec1;"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -241,7 +233,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="txtGhiChu">
+                    <Component class="javax.swing.JTextPane" name="txtMoTa">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -282,16 +274,25 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnDelete">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnClear">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -307,21 +308,33 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="|&lt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnPrev">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnNext">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnLast">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&gt;|"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -349,7 +362,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" pref="341" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" pref="335" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -361,51 +374,16 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblKhoaHoc">
+                <Component class="javax.swing.JTable" name="tblGridView">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="4">
-                        <Column editable="true" title="M&#xc3; KH" type="java.lang.Object"/>
-                        <Column editable="true" title="TH&#x1edc;I L&#x1af;&#x1ee2;NG" type="java.lang.Object"/>
+                      <Table columnCount="5" rowCount="4">
+                        <Column editable="true" title="M&#xc3; C&#x110;" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xca;N C&#x110;" type="java.lang.Object"/>
                         <Column editable="true" title="H&#x1ecc;C PH&#xcd;" type="java.lang.Object"/>
-                        <Column editable="true" title="KHAI GI&#x1ea2;NG" type="java.lang.Object"/>
-                        <Column editable="true" title="T&#x1ea0;O B&#x1ede;I" type="java.lang.Object"/>
-                        <Column editable="true" title="NG&#xc0;Y T&#x1ea0;O" type="java.lang.Object"/>
+                        <Column editable="true" title="TH&#x1edc;I L&#x1af;&#x1ee2;NG" type="java.lang.Object"/>
+                        <Column editable="true" title="H&#xcc;NH" type="java.lang.Object"/>
                       </Table>
-                    </Property>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
                     </Property>
                     <Property name="rowHeight" type="int" value="22"/>
                     <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
@@ -415,6 +393,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblGridViewMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

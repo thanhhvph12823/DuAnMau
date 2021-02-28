@@ -48,7 +48,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         jTextPane1 = new javax.swing.JTextPane();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -147,13 +147,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         jPanel7.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
-        jButton2.setText("Thêm");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        jPanel7.add(jButton2);
+        jPanel7.add(btnAdd);
 
         jButton3.setText("Sửa");
         jPanel7.add(jButton3);
@@ -282,9 +282,9 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,7 +329,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

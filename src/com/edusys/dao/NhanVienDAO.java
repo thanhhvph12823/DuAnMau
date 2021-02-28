@@ -15,8 +15,9 @@ import java.util.List;
  *
  * @author thanhhvph12823
  */
-public class NhanVienDAO {
+public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
 
+    @Override
     public void insert(NhanVien model) {
         String sql = "INSERT INTO NhanVien (MaNV, MatKhau, HoTen, VaiTro) VALUES (?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
@@ -26,6 +27,7 @@ public class NhanVienDAO {
                 model.isVaiTro());
     }
 
+    @Override
     public void update(NhanVien model) {
         String sql = "UPDATE NhanVien SET MatKhau=?, HoTen=?, VaiTro=? WHERE MaNV=?";
         JDBCHelper.executeUpdate(sql,
@@ -35,20 +37,10 @@ public class NhanVienDAO {
                 model.getMaNV());
     }
 
+    @Override
     public void delete(String MaNV) {
         String sql = "DELETE FROM NhanVien WHERE MaNV=?";
         JDBCHelper.executeUpdate(sql, MaNV);
-    }
-
-    public List<NhanVien> select() {
-        String sql = "SELECT * FROM NhanVien";
-        return select(sql);
-    }
-
-    public NhanVien findById(String manv) {
-        String sql = "SELECT * FROM NhanVien WHERE MaNV=?";
-        List<NhanVien> list = select(sql, manv);
-        return list.size() > 0 ? list.get(0) : null;
     }
 
     private List<NhanVien> select(String sql, Object... args) {
@@ -77,5 +69,23 @@ public class NhanVienDAO {
         model.setHoTen(rs.getString("HoTen"));
         model.setVaiTro(rs.getBoolean("VaiTro"));
         return model;
+    }
+
+    @Override
+    public List<NhanVien> selectAll() {
+        String sql = "SELECT * FROM NhanVien";
+        return select(sql);
+    }
+
+    @Override
+    public NhanVien selectByID(String key) {
+        String sql = "SELECT * FROM NhanVien WHERE MaNV=?";
+        List<NhanVien> list = select(sql, key);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+
+    @Override
+    protected List<NhanVien> selectBySQL(String sql, Object... args) {
+        return select(sql, args);
     }
 }

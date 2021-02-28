@@ -37,8 +37,8 @@ public class HocVienJDialog extends javax.swing.JDialog {
         pnlHocVien = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHocVien = new javax.swing.JTable();
-        btnSuaDiem = new javax.swing.JButton();
-        btnXoaHV = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         pnlNguoiHoc = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNguoiHoc = new javax.swing.JTable();
@@ -52,7 +52,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
         pnlTenCD.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "CHUYÊN ĐỀ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
-        pnlTenCD.setLayout(new java.awt.GridLayout());
+        pnlTenCD.setLayout(new java.awt.GridLayout(1, 0));
 
         cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         pnlTenCD.add(cboChuyenDe);
@@ -60,7 +60,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
         jPanel1.add(pnlTenCD);
 
         pnlTenKH.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "KHÓA HỌC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
-        pnlTenKH.setLayout(new java.awt.GridLayout());
+        pnlTenKH.setLayout(new java.awt.GridLayout(1, 0));
 
         cboKhoaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         pnlTenKH.add(cboKhoaHoc);
@@ -82,9 +82,9 @@ public class HocVienJDialog extends javax.swing.JDialog {
         tblHocVien.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(tblHocVien);
 
-        btnSuaDiem.setText("Cập nhật điểm");
+        btnUpdate.setText("Cập nhật điểm");
 
-        btnXoaHV.setText("Xóa khỏi khóa học");
+        btnDelete.setText("Xóa khỏi khóa học");
 
         javax.swing.GroupLayout pnlHocVienLayout = new javax.swing.GroupLayout(pnlHocVien);
         pnlHocVien.setLayout(pnlHocVienLayout);
@@ -95,9 +95,9 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHocVienLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXoaHV)
+                .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSuaDiem)
+                .addComponent(btnUpdate)
                 .addContainerGap())
         );
         pnlHocVienLayout.setVerticalGroup(
@@ -106,8 +106,8 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlHocVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSuaDiem)
-                    .addComponent(btnXoaHV))
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
                 .addContainerGap())
         );
 
@@ -242,9 +242,9 @@ public class HocVienJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSuaDiem;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnThemHV;
-    private javax.swing.JButton btnXoaHV;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cboChuyenDe;
     private javax.swing.JComboBox<String> cboKhoaHoc;
     private javax.swing.JPanel jPanel1;

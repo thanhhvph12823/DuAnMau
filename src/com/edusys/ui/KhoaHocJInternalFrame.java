@@ -5,18 +5,34 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.ChuyenDeDAO;
+import com.edusys.dao.KhoaHocDAO;
+import com.edusys.entity.ChuyenDe;
+import com.edusys.entity.KhoaHoc;
+import com.edusys.utils.DialogHelper;
+import com.edusys.utils.ShareHelper;
+import com.edusys.utils.XDate;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author thanhhvph12823
  */
-public class KhoaHocJDialog extends javax.swing.JDialog {
+public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
+
+    int index = 0;
+    KhoaHocDAO dao = new KhoaHocDAO();
+    ChuyenDeDAO cddao = new ChuyenDeDAO();
 
     /**
-     * Creates new form KhoaHocJDialog
+     * Creates new form KhoaHocJInternalFrame
      */
-    public KhoaHocJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public KhoaHocJInternalFrame() {
         initComponents();
+        init();
     }
 
     /**
@@ -62,14 +78,35 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         btnLast = new javax.swing.JButton();
         pnlDanhSach = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblKhoaHoc = new javax.swing.JTable();
+        tblGridView = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         pnlTenCD.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "CHUYÊN ĐỀ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 0))); // NOI18N
         pnlTenCD.setLayout(new java.awt.GridLayout(1, 0));
 
         cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboChuyenDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChuyenDeActionPerformed(evt);
+            }
+        });
         pnlTenCD.add(cboChuyenDe);
 
         pnlTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -83,12 +120,6 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
 
         txtTenCD.setForeground(new java.awt.Color(255, 0, 0));
         pnlTextField.add(txtTenCD);
-
-        txtNgayKG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNgayKGActionPerformed(evt);
-            }
-        });
         pnlTextField.add(txtNgayKG);
 
         lblHocPhi.setText("Học phí");
@@ -150,12 +181,27 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         pnlFunctBtn.add(btnAdd);
 
         btnUpdate.setText("Sửa");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnUpdate);
 
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnDelete);
 
         btnClear.setText("Mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnClear);
 
         pnlButton.add(pnlFunctBtn);
@@ -163,15 +209,35 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         pnlNavBtn.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnFirst);
 
         btnPrev.setText("<<");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnPrev);
 
         btnNext.setText(">>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnNext);
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnLast);
 
         pnlButton.add(pnlNavBtn);
@@ -202,7 +268,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
 
         tabs.addTab("CẬP NHẬT", pnlCapNhat);
 
-        tblKhoaHoc.setModel(new javax.swing.table.DefaultTableModel(
+        tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -213,9 +279,14 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
                 "MÃ KH", "THỜI LƯỢNG", "HỌC PHÍ", "KHAI GIẢNG", "TẠO BỞI", "NGÀY TẠO"
             }
         ));
-        tblKhoaHoc.setRowHeight(22);
-        tblKhoaHoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(tblKhoaHoc);
+        tblGridView.setRowHeight(22);
+        tblGridView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGridViewMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblGridView);
 
         javax.swing.GroupLayout pnlDanhSachLayout = new javax.swing.GroupLayout(pnlDanhSach);
         pnlDanhSach.setLayout(pnlDanhSachLayout);
@@ -249,61 +320,69 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnlTenCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addComponent(tabs))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNgayKGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayKGActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNgayKGActionPerformed
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        this.fillComboBox();
+        this.load();
+        this.clear();
+        this.setStatus(true);
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void tblGridViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGridViewMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.index = tblGridView.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(0);
+            }
+        }
+    }//GEN-LAST:event_tblGridViewMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        add();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KhoaHocJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KhoaHocJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KhoaHocJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KhoaHocJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                KhoaHocJDialog dialog = new KhoaHocJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        this.index = tblGridView.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void cboChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuyenDeActionPerformed
+        selectComboBox();
+    }//GEN-LAST:event_cboChuyenDeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -333,7 +412,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTextArea;
     private javax.swing.JPanel pnlTextField;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblKhoaHoc;
+    private javax.swing.JTable tblGridView;
     private javax.swing.JTextPane txtGhiChu;
     private javax.swing.JTextField txtHocPhi;
     private javax.swing.JTextField txtMaNV;
@@ -342,4 +421,147 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+
+    }
+
+    private void fillComboBox() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboChuyenDe.getModel();
+        model.removeAllElements();
+        try {
+            List<ChuyenDe> list = cddao.select();
+            for (ChuyenDe cd : list) {
+                model.addElement(cd);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void load() {
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        try {
+            List<KhoaHoc> list = dao.select();
+            for (KhoaHoc kh : list) {
+                Object[] row = {
+                    kh.getMaKH(),
+                    kh.getMaCD(),
+                    kh.getThoiLuong(),
+                    kh.getHocPhi(),
+                    XDate.toString(kh.getNgayKG()),
+                    kh.getMaNV(),
+                    XDate.toString(kh.getNgayTao())
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void setStatus(boolean b) {
+        btnAdd.setEnabled(b);
+        btnUpdate.setEnabled(!b);
+        btnDelete.setEnabled(!b);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblGridView.getRowCount() - 1;
+        btnFirst.setEnabled(!b && first);
+        btnPrev.setEnabled(!b && first);
+        btnLast.setEnabled(!b && last);
+        btnNext.setEnabled(!b && last);
+    }
+
+    private void edit() {
+        try {
+            Integer makh = (Integer) tblGridView.getValueAt(this.index, 0);
+            KhoaHoc model = dao.findById(makh);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void add() {
+        KhoaHoc model = getModel();
+        model.setNgayTao(new Date());
+        try {
+            dao.insert(model);
+            this.load();
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    private void update() {
+        KhoaHoc model = getModel();
+        try {
+            dao.update(model);
+            this.load();
+            DialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    private void delete() {
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa khóa học này?")) {
+            Integer makh = Integer.valueOf(cboChuyenDe.getToolTipText());
+            try {
+                dao.delete(makh);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    private void clear() {
+        KhoaHoc model = new KhoaHoc();
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        model.setMaCD(chuyenDe.getMaCD());
+        model.setMaNV(ShareHelper.USER.getMaNV());
+        model.setNgayKG(XDate.add(30));
+        model.setNgayTao(XDate.now());
+        this.setModel(model);
+    }
+
+    private void selectComboBox() {
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        txtThoiLuong.setText(String.valueOf(chuyenDe.getThoiLuong()));
+        txtHocPhi.setText(String.valueOf(chuyenDe.getHocPhi()));
+    }
+
+    private KhoaHoc getModel() {
+        KhoaHoc model = new KhoaHoc();
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        model.setMaCD(chuyenDe.getMaCD());
+        model.setNgayKG(XDate.toDate(txtNgayKG.getText()));
+        model.setHocPhi(Double.valueOf(txtHocPhi.getText()));
+        model.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+        model.setGhiChu(txtGhiChu.getText());
+        model.setMaNV(ShareHelper.USER.getMaNV());
+        model.setNgayTao(XDate.toDate(txtNgayTao.getText()));
+        model.setMaKH(Integer.valueOf(cboChuyenDe.getToolTipText()));
+        return model;
+    }
+
+    private void setModel(KhoaHoc model) {
+        cboChuyenDe.setToolTipText(String.valueOf(model.getMaKH()));
+        cboChuyenDe.setSelectedItem(cddao.findById(model.getMaCD()));
+        txtNgayKG.setText(XDate.toString(model.getNgayKG()));
+        txtHocPhi.setText(String.valueOf(model.getHocPhi()));
+        txtThoiLuong.setText(String.valueOf(model.getThoiLuong()));
+        txtMaNV.setText(model.getMaNV());
+        txtNgayTao.setText(XDate.toString(model.getNgayTao()));
+        txtGhiChu.setText(model.getGhiChu());
+    }
 }

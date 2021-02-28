@@ -46,10 +46,10 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         jRadioButton2 = new javax.swing.JRadioButton();
         pnlButton = new javax.swing.JPanel();
         pnlFunctBtn = new javax.swing.JPanel();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
-        btnMoi = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         pnlNavBtn = new javax.swing.JPanel();
         btnFirst = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
@@ -128,22 +128,22 @@ public class NhanVienJDialog extends javax.swing.JDialog {
 
         pnlFunctBtn.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        pnlFunctBtn.add(btnThem);
+        pnlFunctBtn.add(btnAdd);
 
-        btnSua.setText("Sửa");
-        pnlFunctBtn.add(btnSua);
+        btnUpdate.setText("Sửa");
+        pnlFunctBtn.add(btnUpdate);
 
-        btnXoa.setText("Xóa");
-        pnlFunctBtn.add(btnXoa);
+        btnDelete.setText("Xóa");
+        pnlFunctBtn.add(btnDelete);
 
-        btnMoi.setText("Mới");
-        pnlFunctBtn.add(btnMoi);
+        btnClear.setText("Mới");
+        pnlFunctBtn.add(btnClear);
 
         pnlButton.add(pnlFunctBtn);
 
@@ -244,9 +244,9 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaCDActionPerformed
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
@@ -295,14 +295,14 @@ public class NhanVienJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;

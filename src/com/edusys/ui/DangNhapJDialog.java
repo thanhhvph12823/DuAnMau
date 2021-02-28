@@ -5,6 +5,10 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.NhanVienDAO;
+import com.edusys.entity.NhanVien;
+import com.edusys.utils.DialogHelper;
+import com.edusys.utils.ShareHelper;
 import com.edusys.utils.XImage;
 import java.awt.Color;
 
@@ -57,11 +61,21 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnDangNhap.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         btnKetThuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icon/Exit.png"))); // NOI18N
         btnKetThuc.setText("Kết thúc");
         btnKetThuc.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKetThuc.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnKetThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKetThucActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +125,14 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        login();
+    }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
+        exit();
+    }//GEN-LAST:event_btnKetThucActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,5 +191,34 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         this.setIconImage(XImage.getAppIcon());
         this.getContentPane().setBackground(Color.WHITE);
     }
-    
+
+    NhanVienDAO dao = new NhanVienDAO();
+
+    private void login() {
+        String manv = txtMaNV.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+        try {
+            NhanVien nhanVien = dao.selectByID(manv);
+            if (nhanVien != null) {
+                String matKhau2 = nhanVien.getMatKhau();
+                if (matKhau.equals(matKhau2)) {
+                    ShareHelper.USER = nhanVien;
+                    DialogHelper.alert(this, "Đăng nhập thành công!");
+                    this.dispose();
+                } else {
+                    DialogHelper.alert(this, "Sai mật khẩu!");
+                }
+            } else {
+                DialogHelper.alert(this, "Sai tên đăng nhập!");
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void exit() {
+        if (DialogHelper.confirm(this, "Bạn có muốn thoát khỏi ứng dụng không?")) {
+            System.exit(0);
+        }
+    }
 }

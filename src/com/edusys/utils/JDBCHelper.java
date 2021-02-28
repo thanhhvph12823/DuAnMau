@@ -42,7 +42,6 @@ public class JDBCHelper {
 
     public static void executeUpdate(String sql, Object... args) {
         try {
-
             PreparedStatement stmt = prepareStatement(sql, args);
             try {
                 stmt.executeUpdate();

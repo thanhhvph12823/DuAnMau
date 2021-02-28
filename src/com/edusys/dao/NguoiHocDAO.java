@@ -18,7 +18,7 @@ import java.util.List;
 public class NguoiHocDAO {
 
     public void insert(NguoiHoc model) {
-        String sql = "INSERT INTO NguoiHoc (MaNH, HoTen, NgaySinh, GioiTinh, DienThoai, Email, GhiChu, MaNV) VALUES( ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";
+        String sql = "INSERT INTO NGUOIHOC (MANH, HOTEN, NGAYSINH, GIOITINH, DIENTHOAI, EMAIL, GHICHU, MANV) VALUES( ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";
         JDBCHelper.executeUpdate(sql,
                 model.getMaNH(),
                 model.getHoTen(),
@@ -31,7 +31,7 @@ public class NguoiHocDAO {
     }
 
     public void update(NguoiHoc model) {
-        String sql = "UPDATE NguoiHoc SET HoTen=?, NgaySinh=?, GioiTinh=?, DienThoai=?, Email=?, GhiChu=?, MaNV =  ? WHERE  MaNH =  ?";
+        String sql = "UPDATE NGUOIHOC SET HOTEN=?, NGAYSINH=?, GIOITINH=?, DIENTHOAI=?, EMAIL=?, GHICHU=?, MANV =  ? WHERE  MANH =  ?";
         JDBCHelper.executeUpdate(sql,
                 model.getHoTen(),
                 model.getNgaySinh(),
@@ -44,28 +44,28 @@ public class NguoiHocDAO {
     }
 
     public void delete(String id) {
-        String sql = "DELETE FROM NguoiHoc WHERE MaNH=?";
+        String sql = "DELETE FROM NGUOIHOC WHERE MANH=?";
         JDBCHelper.executeUpdate(sql, id);
     }
 
     public List<NguoiHoc> select() {
-        String sql = "SELECT * FROM NguoiHoc";
+        String sql = "SELECT * FROM NGUOIHOC";
         return select(sql);
     }
 
     public List<NguoiHoc> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM NguoiHoc WHERE HoTen LIKE ?";
+        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
         return select(sql, "%" + keyword + "%");
     }
 
     public List<NguoiHoc> selectByCourse(Integer makh) {
-        String sql = "SELECT * FROM NguoiHoc WHERE MaNH NOT IN (SELECT MaNH FROM HocVien WHERE MaKH=?)";
+        String sql = "SELECT * FROM NGUOIHOC WHERE MANH NOT IN (SELECT MANH FROM HOCVIEN WHERE MaKH=?)";
         return select(sql, makh);
     }
 
-    public NguoiHoc findById(String manh) {
-        String sql = "SELECT * FROM NguoiHoc WHERE MaNH=?";
-        List<NguoiHoc> list = select(sql, manh);
+    public NguoiHoc findById(String MANH) {
+        String sql = "SELECT * FROM NGUOIHOC WHERE MANH=?";
+        List<NguoiHoc> list = select(sql, MANH);
         return list.size() > 0 ? list.get(0) : null;
     }
 
@@ -90,15 +90,15 @@ public class NguoiHocDAO {
 
     private NguoiHoc readFromResultSet(ResultSet rs) throws SQLException {
         NguoiHoc model = new NguoiHoc();
-        model.setMaNH(rs.getString("MaNH"));
-        model.setHoTen(rs.getString("HoTen"));
-        model.setNgaySinh(rs.getDate("NgaySinh"));
-        model.setGioiTinh(rs.getBoolean("GioiTinh"));
-        model.setDienThoai(rs.getString("DienThoai"));
-        model.setEmail(rs.getString("Email"));
-        model.setGhiChu(rs.getString("GhiChu"));
-        model.setMaNV(rs.getString("MaNV"));
-        model.setNgayDK(rs.getDate("NgayDK"));
+        model.setMaNH(rs.getString("MANH"));
+        model.setHoTen(rs.getString("HOTEN"));
+        model.setNgaySinh(rs.getDate("NGAYSINH"));
+        model.setGioiTinh(rs.getBoolean("GIOITINH"));
+        model.setDienThoai(rs.getString("DIENTHOAI"));
+        model.setEmail(rs.getString("EMAIL"));
+        model.setGhiChu(rs.getString("GHICHU"));
+        model.setMaNV(rs.getString("MANV"));
+        model.setNgayDK(rs.getDate("NGAYDK"));
         return model;
     }
 }

@@ -267,25 +267,25 @@
                     <Property name="rows" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="btnThem">
+                    <Component class="javax.swing.JButton" name="btnAdd">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnSua">
+                    <Component class="javax.swing.JButton" name="btnUpdate">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnXoa">
+                    <Component class="javax.swing.JButton" name="btnDelete">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnMoi">
+                    <Component class="javax.swing.JButton" name="btnClear">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
                       </Properties>

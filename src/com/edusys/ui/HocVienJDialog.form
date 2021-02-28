@@ -141,9 +141,9 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnXoaHV" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnSuaDiem" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -154,8 +154,8 @@
                       <Component id="jScrollPane3" pref="324" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSuaDiem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnXoaHV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -221,12 +221,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnSuaDiem">
+            <Component class="javax.swing.JButton" name="btnUpdate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t &#x111;i&#x1ec3;m"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnXoaHV">
+            <Component class="javax.swing.JButton" name="btnDelete">
               <Properties>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a kh&#x1ecf;i kh&#xf3;a h&#x1ecd;c"/>
               </Properties>

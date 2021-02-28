@@ -5,11 +5,18 @@
  */
 package com.edusys.ui;
 
+import com.edusys.utils.DialogHelper;
+import com.edusys.utils.ShareHelper;
 import com.edusys.utils.XImage;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -50,7 +57,17 @@ public class EduSysJFrame extends javax.swing.JFrame {
         StatusBar = new javax.swing.JPanel();
         lblTrangThai = new javax.swing.JLabel();
         lblDongHo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/com/edusys/icon/logo.png"));
+        Image image = icon.getImage();
+        Image newimage = image.getScaledInstance(1500, 1000, Image.SCALE_SMOOTH);
+        jDesktopPane1 = new javax.swing.JDesktopPane()
+        {
+            public void paintComponent(Graphics g)
+            {
+                g.drawImage(newimage, 0, 0, getWidth(),getHeight(),this);
+            }
+        }
+        ;
         menuBar = new javax.swing.JMenuBar();
         mnuHeThong = new javax.swing.JMenu();
         mniDangNhap = new javax.swing.JMenuItem();
@@ -183,8 +200,16 @@ public class EduSysJFrame extends javax.swing.JFrame {
 
         pnlTrangThai.add(StatusBar, java.awt.BorderLayout.SOUTH);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icon/logo.png"))); // NOI18N
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 529, Short.MAX_VALUE)
+        );
 
         menuBar.setName("MenuBar"); // NOI18N
 
@@ -366,15 +391,15 @@ public class EduSysJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbaCongCu, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
             .addComponent(pnlTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbaCongCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -390,11 +415,11 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKetThucActionPerformed
 
     private void btnChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenDeActionPerformed
-        // TODO add your handling code here:
+        openChuyenDe();
     }//GEN-LAST:event_btnChuyenDeActionPerformed
 
     private void btnKhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaHocActionPerformed
-        // TODO add your handling code here:
+        openKhoaHoc();
     }//GEN-LAST:event_btnKhoaHocActionPerformed
 
     private void btnNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNguoiHocActionPerformed
@@ -402,23 +427,23 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNguoiHocActionPerformed
 
     private void btnHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHocVienActionPerformed
-        // TODO add your handling code here:
+        openHocVien();
     }//GEN-LAST:event_btnHocVienActionPerformed
 
     private void btnHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuongDanActionPerformed
-        // TODO add your handling code here:
+        openHuongDan();
     }//GEN-LAST:event_btnHuongDanActionPerformed
 
     private void mniDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangNhapActionPerformed
-        // TODO add your handling code here:
+        openDangNhap();
     }//GEN-LAST:event_mniDangNhapActionPerformed
 
     private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
-        // TODO add your handling code here:
+        DangXuat();
     }//GEN-LAST:event_mniDangXuatActionPerformed
 
     private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
-        // TODO add your handling code here:
+        openDoiMatKhau();
     }//GEN-LAST:event_mniDoiMatKhauActionPerformed
 
     private void mniKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKetThucActionPerformed
@@ -426,11 +451,11 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniKetThucActionPerformed
 
     private void mniChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniChuyenDeActionPerformed
-        // TODO add your handling code here:
+        openChuyenDe();
     }//GEN-LAST:event_mniChuyenDeActionPerformed
 
     private void mniKhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKhoaHocActionPerformed
-        // TODO add your handling code here:
+        openKhoaHoc();
     }//GEN-LAST:event_mniKhoaHocActionPerformed
 
     private void mniNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNguoiHocActionPerformed
@@ -438,35 +463,35 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniNguoiHocActionPerformed
 
     private void mniHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHocVienActionPerformed
-        // TODO add your handling code here:
+        openHocVien();
     }//GEN-LAST:event_mniHocVienActionPerformed
 
     private void mniNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNhanVienActionPerformed
-        // TODO add your handling code here:
+        openNhanVien();
     }//GEN-LAST:event_mniNhanVienActionPerformed
 
     private void mniBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBangDiemActionPerformed
-        // TODO add your handling code here:
+        openThongKe();
     }//GEN-LAST:event_mniBangDiemActionPerformed
 
     private void mniLuongNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLuongNguoiHocActionPerformed
-        // TODO add your handling code here:
+        openThongKe();
     }//GEN-LAST:event_mniLuongNguoiHocActionPerformed
 
     private void mniDiemChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDiemChuyenDeActionPerformed
-        // TODO add your handling code here:
+        openThongKe();
     }//GEN-LAST:event_mniDiemChuyenDeActionPerformed
 
     private void mniDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoanhThuActionPerformed
-        // TODO add your handling code here:
+        openThongKe();
     }//GEN-LAST:event_mniDoanhThuActionPerformed
 
     private void mniHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHuongDanActionPerformed
-        // TODO add your handling code here:
+        openHuongDan();
     }//GEN-LAST:event_mniHuongDanActionPerformed
 
     private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
-        // TODO add your handling code here:
+        openGioithieu();
     }//GEN-LAST:event_mniGioiThieuActionPerformed
 
     /**
@@ -514,7 +539,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnKetThuc;
     private javax.swing.JButton btnKhoaHoc;
     private javax.swing.JButton btnNguoiHoc;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -550,7 +575,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
 
     private void init() {
         this.setLocationRelativeTo(null);
-        this.setIconImage(XImage.getAppIcon());
+        this.setIconImage(ShareHelper.APP_ICON);
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -566,6 +591,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
 
     void openLogin() {
         new DangNhapJDialog(this, true).setVisible(true);
+
     }
 
     void openWelcome() {
@@ -579,7 +605,122 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }
 
     void openNguoiHoc() {
-        new NguoiHocJDialog(this, true).setVisible(true);
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+//        new NguoiHocJDialog(this, true).setVisible(true);
+            NguoiHocJInternalFrame NHIF = new NguoiHocJInternalFrame();
+            centerAllFrame(NHIF);
+            NHIF.setVisible(true);
+            this.jDesktopPane1.add(NHIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openChuyenDe() {
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+            ChuyenDeJInternalFrame CDIF = new ChuyenDeJInternalFrame();
+            centerAllFrame(CDIF);
+            CDIF.setVisible(true);
+            this.jDesktopPane1.add(CDIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openKhoaHoc() {
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+            KhoaHocJInternalFrame KHIF = new KhoaHocJInternalFrame();
+            centerAllFrame(KHIF);
+            KHIF.setVisible(true);
+            this.jDesktopPane1.add(KHIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openHuongDan() {
+        closeAllFrame();
+
+    }
+
+    private void openThongKe() {
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+            ThongKeJInternalFrame TKIF = new ThongKeJInternalFrame();
+            centerAllFrame(TKIF);
+            TKIF.setVisible(true);
+            this.jDesktopPane1.add(TKIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openHocVien() {
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+            HocVienJInternalFrame HVIF = new HocVienJInternalFrame();
+            centerAllFrame(HVIF);
+            HVIF.setVisible(true);
+            this.jDesktopPane1.add(HVIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openNhanVien() {
+        if (ShareHelper.authenticated()) {
+            closeAllFrame();
+            NhanVienJInternalFrame NVIF = new NhanVienJInternalFrame();
+            centerAllFrame(NVIF);
+            NVIF.setVisible(true);
+            this.jDesktopPane1.add(NVIF);
+        } else {
+            DialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    private void openDoiMatKhau() {
+        closeAllFrame();
+        DoiMatKhauJInternalFrame DMKIF = new DoiMatKhauJInternalFrame();
+        centerAllFrame(DMKIF);
+        DMKIF.setVisible(true);
+        this.jDesktopPane1.add(DMKIF);
+    }
+
+    private void DangXuat() {
+        closeAllFrame();
+        ShareHelper.logoff();
+        openDangNhap();
+    }
+
+    private void openDangNhap() {
+        closeAllFrame();
+        new DangNhapJDialog(this, true).setVisible(true);
+    }
+
+    private void openGioithieu() {
+        closeAllFrame();
+        GioiThieuJInternalFrame GTIF = new GioiThieuJInternalFrame();
+        centerAllFrame(GTIF);
+        GTIF.setVisible(true);
+        this.jDesktopPane1.add(GTIF);
+    }
+
+    private void closeAllFrame() {
+        JInternalFrame[] frames = jDesktopPane1.getAllFrames();
+        for (int i = 0; i < frames.length; i++) {
+            jDesktopPane1.getDesktopManager().closeFrame(frames[i]);
+        }
+    }
+
+    private void centerAllFrame(JInternalFrame IF) {
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = IF.getSize();
+        IF.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
     }
 
 }

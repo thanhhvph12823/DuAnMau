@@ -5,18 +5,30 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.ChuyenDeDAO;
+import com.edusys.entity.ChuyenDe;
+import com.edusys.utils.DialogHelper;
+import com.edusys.utils.ShareHelper;
+import java.io.File;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author thanhhvph12823
  */
-public class ChuyenDeJDialog extends javax.swing.JDialog {
+public class ChuyenDeJInternalFrame extends javax.swing.JInternalFrame {
+
+    int index = 0;
+    ChuyenDeDAO dao = new ChuyenDeDAO();
 
     /**
-     * Creates new form ChuyenDeJDialog2
+     * Creates new form ChuyenDeJInternalFrame
      */
-    public ChuyenDeJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ChuyenDeJInternalFrame() {
         initComponents();
+        init();
     }
 
     /**
@@ -59,16 +71,19 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
         btnLast = new javax.swing.JButton();
         pnlDanhSach = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblChuyenDe = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("EduSys - Quản lý chuyên đề");
+        tblGridView = new javax.swing.JTable();
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 0, 204));
         lblTitle.setText("QUẢN LÝ CHUYÊN ĐỀ");
 
         pnlLogo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102)), "Hình Logo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP));
+
+        lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnhMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLogoLayout = new javax.swing.GroupLayout(pnlLogo);
         pnlLogo.setLayout(pnlLogoLayout);
@@ -86,12 +101,6 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
 
         lblMaCD.setText("Mã chuyên đề");
         pnlTextField.add(lblMaCD);
-
-        txtMaCD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaCDActionPerformed(evt);
-            }
-        });
         pnlTextField.add(txtMaCD);
 
         lblTenCD.setText("Tên chuyên đề");
@@ -149,12 +158,27 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
         pnlFunctBtn.add(btnAdd);
 
         btnUpdate.setText("Sửa");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnUpdate);
 
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnDelete);
 
         btnClear.setText("Mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
         pnlFunctBtn.add(btnClear);
 
         pnlButton.add(pnlFunctBtn);
@@ -162,15 +186,35 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
         pnlNavBtn.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnFirst);
 
         btnPrev.setText("<<");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnPrev);
 
         btnNext.setText(">>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnNext);
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
         pnlNavBtn.add(btnLast);
 
         pnlButton.add(pnlNavBtn);
@@ -206,7 +250,7 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
 
         tabs.addTab("CẬP NHẬT", pnlCapNhat);
 
-        tblChuyenDe.setModel(new javax.swing.table.DefaultTableModel(
+        tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -217,9 +261,14 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
                 "MÃ CĐ", "TÊN CĐ", "HỌC PHÍ", "THỜI LƯỢNG", "HÌNH"
             }
         ));
-        tblChuyenDe.setRowHeight(22);
-        tblChuyenDe.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(tblChuyenDe);
+        tblGridView.setRowHeight(22);
+        tblGridView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGridViewMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblGridView);
 
         javax.swing.GroupLayout pnlDanhSachLayout = new javax.swing.GroupLayout(pnlDanhSach);
         pnlDanhSach.setLayout(pnlDanhSachLayout);
@@ -261,56 +310,56 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMaCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaCDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaCDActionPerformed
-
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        add();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChuyenDeJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChuyenDeJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChuyenDeJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChuyenDeJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ChuyenDeJDialog dialog = new ChuyenDeJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        this.index = 0;
+        this.edit();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        this.index--;
+        this.edit();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        this.index++;
+        this.edit();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        this.index = tblGridView.getRowCount() - 1;
+        this.edit();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void tblGridViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGridViewMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.index = tblGridView.rowAtPoint(evt.getPoint());
+            if (this.index >= 0) {
+                this.edit();
+                tabs.setSelectedIndex(0);
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_tblGridViewMouseClicked
+
+    private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
+        this.selectImage();
+    }//GEN-LAST:event_lblAnhMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -339,11 +388,138 @@ public class ChuyenDeJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTextArea;
     private javax.swing.JPanel pnlTextField;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblChuyenDe;
+    private javax.swing.JTable tblGridView;
     private javax.swing.JTextField txtHocPhi;
     private javax.swing.JTextField txtMaCD;
     private javax.swing.JTextPane txtMoTa;
     private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+
+    }
+
+    private void load() {
+        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        model.setRowCount(0);
+        try {
+            List<ChuyenDe> list = dao.select();
+            for (ChuyenDe cd : list) {
+                Object[] row = {
+                    cd.getMaCD(),
+                    cd.getTenCD(),
+                    cd.getHocPhi(),
+                    cd.getThoiLuong(),
+                    cd.getHinh()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void add() {
+        ChuyenDe model = getModel();
+        try {
+            dao.insert(model);
+            this.load();
+            this.clear();
+            DialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    private void update() {
+        ChuyenDe model = getModel();
+        try {
+            dao.update(model);
+            this.load();
+            DialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    private void delete() {
+        if (DialogHelper.confirm(this, "Bạn có muốn xóa hay không?")) {
+            String macd = txtMaCD.getText();
+            try {
+                dao.delete(macd);
+                this.load();
+                this.clear();
+                DialogHelper.alert(this, "Xóa thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    private void clear() {
+        this.setModel(new ChuyenDe());
+        this.setStatus(true);
+    }
+
+    private void edit() {
+        try {
+            String macd = (String) tblGridView.getValueAt(this.index, 0);
+            ChuyenDe model = dao.findById(macd);
+            if (model != null) {
+                this.setModel(model);
+                this.setStatus(false);
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+
+    private void selectImage() {
+        JFileChooser fc = new JFileChooser();
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            if (ShareHelper.saveLogo(file)) {
+                lblAnh.setIcon(ShareHelper.readLogo(file.getName()));
+                lblAnh.setToolTipText(file.getName());
+            }
+        }
+    }
+
+    private ChuyenDe getModel() {
+        ChuyenDe model = new ChuyenDe();
+        model.setMaCD(txtMaCD.getText());
+        model.setTenCD(txtTenCD.getText());
+        model.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+        model.setHocPhi(Double.valueOf(txtHocPhi.getText()));
+        model.setHinh(lblAnh.getToolTipText());
+        model.setMoTa(txtMoTa.getText());
+        return model;
+    }
+
+    private void setModel(ChuyenDe model) {
+        txtMaCD.setText(model.getMaCD());
+        txtTenCD.setText(model.getTenCD());
+        txtThoiLuong.setText(String.valueOf(model.getThoiLuong()));
+        txtHocPhi.setText(String.valueOf(model.getHocPhi()));
+        txtMoTa.setText(model.getMoTa());
+        lblAnh.setToolTipText(model.getHinh());
+        if (model.getHinh() != null) {
+            lblAnh.setToolTipText(model.getHinh());
+            lblAnh.setIcon(ShareHelper.readLogo(model.getHinh()));
+        }
+    }
+
+    private void setStatus(boolean b) {
+        txtMaCD.setEditable(b);
+        btnAdd.setEnabled(b);
+        btnUpdate.setEnabled(!b);
+        btnDelete.setEnabled(!b);
+        boolean first = this.index > 0;
+        boolean last = this.index < tblGridView.getRowCount() - 1;
+        btnFirst.setEnabled(!b && first);
+        btnPrev.setEnabled(!b && first);
+        btnLast.setEnabled(!b && last);
+        btnNext.setEnabled(!b && last);
+    }
 }
