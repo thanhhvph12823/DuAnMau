@@ -113,7 +113,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
 
     private void init() {
         this.setLocationRelativeTo(null);
-        new Timer(10, new ActionListener() {
+        new Timer(5, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int value = pgbLoading.getValue();

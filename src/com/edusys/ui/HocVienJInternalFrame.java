@@ -34,7 +34,13 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
     public HocVienJInternalFrame() {
         initComponents();
         init();
+    }
+
+    public HocVienJInternalFrame(Integer MaKH) {
         this.MaKH = MaKH;
+        initComponents();
+        init();
+        System.out.println("MAKH: " + MaKH);
     }
 
     /**
@@ -47,7 +53,6 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         bgrPhanLoai = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
         pnlHVKhac = new javax.swing.JPanel();
         cboNguoiHoc = new javax.swing.JComboBox<>();
         txtDiem = new javax.swing.JTextField();
@@ -79,11 +84,14 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
-
         pnlHVKhac.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "HỌC VIÊN KHÁC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
 
         cboNguoiHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNguoiHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNguoiHocActionPerformed(evt);
+            }
+        });
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -97,9 +105,9 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         pnlHVKhacLayout.setHorizontalGroup(
             pnlHVKhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHVKhacLayout.createSequentialGroup()
-                .addComponent(cboNguoiHoc, 0, 496, Short.MAX_VALUE)
+                .addComponent(cboNguoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDiem, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnThem))
         );
@@ -111,7 +119,7 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(btnThem))
         );
 
-        jPanel1.add(pnlHVKhac);
+        getContentPane().add(pnlHVKhac, java.awt.BorderLayout.PAGE_START);
 
         pnlHVKH.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "HỌC VIÊN TRONG CỦA KHÓA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP));
 
@@ -143,6 +151,8 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblGridView);
 
+        bgrPhanLoai.add(rdoTatCa);
+        rdoTatCa.setSelected(true);
         rdoTatCa.setText("Tất cả");
         rdoTatCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +160,7 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        bgrPhanLoai.add(rdoDaNhap);
         rdoDaNhap.setText("Đã nhập điểm");
         rdoDaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,6 +168,7 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        bgrPhanLoai.add(rdoChuaNhap);
         rdoChuaNhap.setText("Chưa nhập điểm");
         rdoChuaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,35 +204,17 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         pnlHVKHLayout.setVerticalGroup(
             pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHVKHLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdoTatCa)
                     .addComponent(rdoDaNhap)
                     .addComponent(rdoChuaNhap)
-                    .addComponent(btnCapNhat))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCapNhat)))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlHVKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlHVKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(pnlHVKH, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,13 +244,16 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
         update();
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
+    private void cboNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNguoiHocActionPerformed
+        this.load();
+    }//GEN-LAST:event_cboNguoiHocActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgrPhanLoai;
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cboNguoiHoc;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlHVKH;
     private javax.swing.JPanel pnlHVKhac;
@@ -268,7 +265,7 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void init() {
-        setFrameIcon((Icon) ShareHelper.APP_ICON);
+//        setFrameIcon((Icon) ShareHelper.APP_ICON);
     }
 
     private void fillComboBox() {
@@ -296,11 +293,14 @@ public class HocVienJInternalFrame extends javax.swing.JInternalFrame {
                 Object[] row = {rs
                     .getInt("MaHV"),
                     rs.getString("MaNH"),
-                    rs.getString("HoTen"), diem,
+                    rs.getString("HoTen"),
+                    diem,
                     false
                 };
                 if (rdoTatCa.isSelected()) {
                     model.addRow(row);
+                    System.out.println("xxx");
+                    System.out.println(row[0]);
                 } else if (rdoDaNhap.isSelected() && diem >= 0) {
                     model.addRow(row);
                 } else if (rdoChuaNhap.isSelected() && diem < 0) {

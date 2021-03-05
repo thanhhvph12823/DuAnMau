@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -302,7 +303,7 @@ public class ThongKeJInternalFrame extends javax.swing.JInternalFrame {
     private void fillComboBoxKhoaHoc() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhoaHoc.getModel();
         model.removeAllElements();
-        List<KhoaHoc> list = khdao.select();
+        List<KhoaHoc> list = khdao.selectAll();
         for (KhoaHoc kh : list) {
             model.addElement(kh);
         }
@@ -312,11 +313,11 @@ public class ThongKeJInternalFrame extends javax.swing.JInternalFrame {
     private void fillComboBoxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
-        List<KhoaHoc> list = khdao.select();
+        List<KhoaHoc> list = khdao.selectAll();
         Calendar cal = Calendar.getInstance();
         for (KhoaHoc kh : list) {
             cal.setTime(kh.getNgayKG());
-            int nam = cal.get(Calendar.YEAR) + 1900;
+            int nam = cal.get(Calendar.YEAR);
             if (model.getIndexOf(nam) < 0) {
                 model.addElement(nam);
             }
@@ -325,40 +326,48 @@ public class ThongKeJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     private void fillTableNguoiHoc() {
-//        DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
-//        model.setRowCount(0);
-//        List<Object[]> list = dao.getNguoiHoc();
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
+        DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = dao.getNguoiHoc();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
     }
 
     private void fillTableBangDiem() {
-//        DefaultTableModel model = (DefaultTableModel) tblBangDiem.getModel();
-//        model.setRowCount(0);
-//        KhoaHoc kh = (KhoaHoc) cboKhoaHoc.getSelectedItem();
-//        List<Object[]> list = dao.getBangDiem(kh.getMaKH());
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
+        DefaultTableModel model = (DefaultTableModel) tblBangDiem.getModel();
+        model.setRowCount(0);
+        if (cboKhoaHoc.getSelectedItem() != null) {
+            KhoaHoc kh = (KhoaHoc) cboKhoaHoc.getSelectedItem();
+            List<Object[]> list = dao.getBangDiem(kh.getMaKH());
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        }
     }
 
     private void fillTableKhoaHoc() {
-//        DefaultTableModel model = (DefaultTableModel) tblTongHop.getModel();
-//        model.setRowCount(0);
-//        List<Object[]> list = dao.getDiemTheoChuyenDe();
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
+        DefaultTableModel model = (DefaultTableModel) tblTongHop.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = dao.getDiemTheoChuyenDe();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
     }
 
     private void fillTableDoanhThu() {
-//        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
-//        model.setRowCount(0);
-//        int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
-//        List<Object[]> list = dao.getDoanhThu(nam);
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        if (cboNam.getSelectedItem() != null) {
+            int nam = Integer.parseInt(cboNam.getSelectedItem().toString());
+            List<Object[]> list = dao.getDoanhThu(nam);
+            for (Object[] row : list) {
+                model.addRow(row);
+            }
+        }
+    }
+    
+    public void setSelectedTab(int tabIndex){
+        tabs.setSelectedIndex(tabIndex);
     }
 }

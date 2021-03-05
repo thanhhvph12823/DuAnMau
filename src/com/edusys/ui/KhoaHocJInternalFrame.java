@@ -70,6 +70,7 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         pnlNavBtn = new javax.swing.JPanel();
+        btnHocVien = new javax.swing.JButton();
         btnFirst = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
@@ -107,6 +108,11 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         pnlTextField.add(lblNgayKG);
 
         cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboChuyenDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChuyenDeActionPerformed(evt);
+            }
+        });
         pnlTextField.add(cboChuyenDe);
         pnlTextField.add(txtNgayKG);
 
@@ -196,6 +202,14 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
 
         pnlNavBtn.setLayout(new java.awt.GridLayout(1, 4, 10, 0));
 
+        btnHocVien.setText("Học viên");
+        btnHocVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHocVienActionPerformed(evt);
+            }
+        });
+        pnlNavBtn.add(btnHocVien);
+
         btnFirst.setText("|<");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,9 +251,9 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(pnlCapNhatLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlCapNhatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 689, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlCapNhatLayout.setVerticalGroup(
@@ -251,7 +265,7 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(pnlTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("CẬP NHẬT", pnlCapNhat);
@@ -348,12 +362,21 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         this.edit();
     }//GEN-LAST:event_btnLastActionPerformed
 
+    private void btnHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHocVienActionPerformed
+        this.openHocVien();
+    }//GEN-LAST:event_btnHocVienActionPerformed
+
+    private void cboChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuyenDeActionPerformed
+        selectComboBox();
+    }//GEN-LAST:event_cboChuyenDeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnHocVien;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
@@ -386,13 +409,14 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void init() {
+        tabs.setSelectedIndex(1);
     }
 
     private void fillComboBox() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboChuyenDe.getModel();
         model.removeAllElements();
         try {
-            List<ChuyenDe> list = cddao.select();
+            List<ChuyenDe> list = cddao.selectAll();
             for (ChuyenDe cd : list) {
                 model.addElement(cd);
             }
@@ -405,7 +429,7 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
         model.setRowCount(0);
         try {
-            List<KhoaHoc> list = dao.select();
+            List<KhoaHoc> list = dao.selectAll();
             for (KhoaHoc kh : list) {
                 Object[] row = {
                     kh.getMaKH(),
@@ -433,12 +457,14 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
         btnPrev.setEnabled(!b && first);
         btnLast.setEnabled(!b && last);
         btnNext.setEnabled(!b && last);
+
+        btnHocVien.setVisible(!b);
     }
 
     private void edit() {
         try {
             Integer makh = (Integer) tblGridView.getValueAt(this.index, 0);
-            KhoaHoc model = dao.findById(makh);
+            KhoaHoc model = dao.selectByID(makh);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);
@@ -498,9 +524,9 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     private void selectComboBox() {
-        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
-        txtThoiLuong.setText(String.valueOf(chuyenDe.getThoiLuong()));
-        txtHocPhi.setText(String.valueOf(chuyenDe.getHocPhi()));
+//        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+//        txtThoiLuong.setText(String.valueOf(chuyenDe.getThoiLuong()));
+//        txtHocPhi.setText(String.valueOf(chuyenDe.getHocPhi()));
     }
 
     private KhoaHoc getModel() {
@@ -519,12 +545,18 @@ public class KhoaHocJInternalFrame extends javax.swing.JInternalFrame {
 
     private void setModel(KhoaHoc model) {
         cboChuyenDe.setToolTipText(String.valueOf(model.getMaKH()));
-        cboChuyenDe.setSelectedItem(cddao.findById(model.getMaCD()));
+        cboChuyenDe.setSelectedItem(cddao.selectByID(model.getMaCD()));
         txtNgayKG.setText(XDate.toString(model.getNgayKG()));
         txtHocPhi.setText(String.valueOf(model.getHocPhi()));
         txtThoiLuong.setText(String.valueOf(model.getThoiLuong()));
         txtMaNV.setText(model.getMaNV());
         txtNgayTao.setText(XDate.toString(model.getNgayTao()));
         txtGhiChu.setText(model.getGhiChu());
+    }
+
+    private void openHocVien() {
+        Integer id = Integer.valueOf(cboChuyenDe.getToolTipText());
+        new HocVienJInternalFrame(id).setVisible(true);
+        this.setVisible(false);
     }
 }

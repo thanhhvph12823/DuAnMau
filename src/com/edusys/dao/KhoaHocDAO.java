@@ -15,8 +15,9 @@ import java.util.List;
  *
  * @author thanhhvph12823
  */
-public class KhoaHocDAO {
+public class KhoaHocDAO extends EduSysDAO<KhoaHoc, Integer> {
 
+    @Override
     public void insert(KhoaHoc model) {
         String sql = "INSERT INTO KhoaHoc (MaCD, HocPhi, ThoiLuong, NgayKG, GhiChu, MaNV) VALUES (?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
@@ -28,6 +29,7 @@ public class KhoaHocDAO {
                 model.getMaNV());
     }
 
+    @Override
     public void update(KhoaHoc model) {
         String sql = "UPDATE KhoaHoc SET MaCD=?, HocPhi=?, ThoiLuong=?, NgayKG=?, GhiChu=?, MaNV=? WHERE MaKH =  ?";
         JDBCHelper.executeUpdate(sql,
@@ -41,23 +43,27 @@ public class KhoaHocDAO {
         );
     }
 
+    @Override
     public void delete(Integer MaKH) {
         String sql = "DELETE FROM KhoaHoc WHERE MaKH=?";
         JDBCHelper.executeUpdate(sql, MaKH);
     }
 
-    public List<KhoaHoc> select() {
+    @Override
+    public List<KhoaHoc> selectAll() {
         String sql = "SELECT * FROM KhoaHoc";
-        return select(sql);
+        return selectBySQL(sql);
     }
 
-    public KhoaHoc findById(Integer makh) {
+    @Override
+    public KhoaHoc selectByID(Integer key) {
         String sql = "SELECT * FROM KhoaHoc WHERE MaKH=?";
-        List<KhoaHoc> list = select(sql, makh);
+        List<KhoaHoc> list = selectBySQL(sql, key);
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    private List<KhoaHoc> select(String sql, Object... args) {
+    @Override
+    protected List<KhoaHoc> selectBySQL(String sql, Object... args) {
         List<KhoaHoc> list = new ArrayList<>();
         try {
             ResultSet rs = null;

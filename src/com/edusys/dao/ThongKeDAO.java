@@ -67,7 +67,8 @@ public class ThongKeDAO {
                     Object[] model = {
                         rs.getString("MaNH"),
                         rs.getString("HoTen"),
-                        diem,};
+                        diem,
+                        xepLoai};
                     list.add(model);
                 }
             } finally {
@@ -115,13 +116,13 @@ public class ThongKeDAO {
                 rs = JDBCHelper.executeQuery(sql, nam);
                 while (rs.next()) {
                     Object[] model = {
-                        rs.getString("ChuyenDe"),
-                        rs.getInt("SoKH"),
-                        rs.getInt("SoHV"),
-                        rs.getDouble("DoanhThu"),
-                        rs.getDouble("ThapNhat"),
-                        rs.getDouble("CaoNhat"),
-                        rs.getDouble("TrungBinh")
+                        rs.getString("TENCD"),
+                        rs.getInt("SOKH"),
+                        rs.getInt("SOHV"),
+                        rs.getDouble("DOANHTHU"),
+                        rs.getDouble("THAPNHAT"),
+                        rs.getDouble("CAONHAT"),
+                        rs.getDouble("TRUNGBINH")
                     };
                     list.add(model);
                 }

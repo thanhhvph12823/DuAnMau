@@ -398,6 +398,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
 
     private void init() {
 //        setIconImage(ShareHelper.APP_ICON);
+        tabs.setSelectedIndex(1);
     }
 
     private NhanVien getModel() {
@@ -418,6 +419,7 @@ public class NhanVienJInternalFrame extends javax.swing.JInternalFrame {
                 this.load();
                 this.clear();
                 DialogHelper.alert(this, "Thêm mới thành công!");
+                tabs.setSelectedIndex(1);
             } catch (Exception e) {
                 DialogHelper.alert(this, "Thêm mới thất bại!");
             }

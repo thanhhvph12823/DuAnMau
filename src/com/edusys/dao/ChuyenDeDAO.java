@@ -15,8 +15,9 @@ import java.util.List;
  *
  * @author thanhhvph12823
  */
-public class ChuyenDeDAO {
+public class ChuyenDeDAO extends EduSysDAO<ChuyenDe, String> {
 
+    @Override
     public void insert(ChuyenDe model) {
         String sql = "INSERT INTO ChuyenDe (MaCD, TenCD, HocPhi, ThoiLuong, Hinh, MoTa) VALUES (?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
@@ -28,6 +29,7 @@ public class ChuyenDeDAO {
                 model.getMoTa());
     }
 
+    @Override
     public void update(ChuyenDe model) {
         String sql = "UPDATE ChuyenDe SET TenCD=?, HocPhi=?, ThoiLuong=?, Hinh=?, MoTa=? WHERE MaCD=?";
         JDBCHelper.executeUpdate(sql,
@@ -39,23 +41,27 @@ public class ChuyenDeDAO {
                 model.getMaCD());
     }
 
+    @Override
     public void delete(String MaCD) {
         String sql = "DELETE FROM ChuyenDe WHERE MaCD=?";
         JDBCHelper.executeUpdate(sql, MaCD);
     }
 
-    public List<ChuyenDe> select() {
+    @Override
+    public List<ChuyenDe> selectAll() {
         String sql = "SELECT * FROM ChuyenDe";
-        return select(sql);
+        return selectBySQL(sql);
     }
 
-    public ChuyenDe findById(String macd) {
+    @Override
+    public ChuyenDe selectByID(String key) {
         String sql = "SELECT * FROM ChuyenDe WHERE MaCD=?";
-        List<ChuyenDe> list = select(sql, macd);
+        List<ChuyenDe> list = selectBySQL(sql, key);
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    private List<ChuyenDe> select(String sql, Object... args) {
+    @Override
+    protected List<ChuyenDe> selectBySQL(String sql, Object... args) {
         List<ChuyenDe> list = new ArrayList<>();
         try {
             ResultSet rs = null;

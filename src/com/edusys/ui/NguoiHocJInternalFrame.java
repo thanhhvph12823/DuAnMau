@@ -324,6 +324,12 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
 
         pnlTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tìm kiếm"));
 
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
+            }
+        });
+
         btnTimKiem.setText("Tìm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,6 +497,11 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
         this.setStatus(true);
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+        this.load();
+        this.clear();
+    }//GEN-LAST:event_txtTimKiemKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgGioiTinh;
     private javax.swing.JButton btnClear;
@@ -535,6 +546,7 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
 
     private void init() {
         this.load();
+        tabs.setSelectedIndex(0);
     }
 
     private void load() {
@@ -609,7 +621,7 @@ public class NguoiHocJInternalFrame extends javax.swing.JInternalFrame {
     private void edit() {
         try {
             String manh = (String) tblNguoiHoc.getValueAt(this.index, 0);
-            NguoiHoc model = dao.findById(manh);
+            NguoiHoc model = dao.selectByID(manh);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);

@@ -15,8 +15,9 @@ import java.util.List;
  *
  * @author thanhhvph12823
  */
-public class NguoiHocDAO {
+public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
 
+    @Override
     public void insert(NguoiHoc model) {
         String sql = "INSERT INTO NGUOIHOC (MANH, HOTEN, NGAYSINH, GIOITINH, DIENTHOAI, EMAIL, GHICHU, MANV) VALUES( ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";
         JDBCHelper.executeUpdate(sql,
@@ -30,6 +31,7 @@ public class NguoiHocDAO {
                 model.getMaNV());
     }
 
+    @Override
     public void update(NguoiHoc model) {
         String sql = "UPDATE NGUOIHOC SET HOTEN=?, NGAYSINH=?, GIOITINH=?, DIENTHOAI=?, EMAIL=?, GHICHU=?, MANV =  ? WHERE  MANH =  ?";
         JDBCHelper.executeUpdate(sql,
@@ -43,33 +45,27 @@ public class NguoiHocDAO {
                 model.getMaNH());
     }
 
+    @Override
     public void delete(String id) {
         String sql = "DELETE FROM NGUOIHOC WHERE MANH=?";
         JDBCHelper.executeUpdate(sql, id);
     }
 
-    public List<NguoiHoc> select() {
+    @Override
+    public List<NguoiHoc> selectAll() {
         String sql = "SELECT * FROM NGUOIHOC";
-        return select(sql);
+        return selectBySQL(sql);
     }
 
-    public List<NguoiHoc> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
-        return select(sql, "%" + keyword + "%");
-    }
-
-    public List<NguoiHoc> selectByCourse(Integer makh) {
-        String sql = "SELECT * FROM NGUOIHOC WHERE MANH NOT IN (SELECT MANH FROM HOCVIEN WHERE MaKH=?)";
-        return select(sql, makh);
-    }
-
-    public NguoiHoc findById(String MANH) {
+    @Override
+    public NguoiHoc selectByID(String key) {
         String sql = "SELECT * FROM NGUOIHOC WHERE MANH=?";
-        List<NguoiHoc> list = select(sql, MANH);
+        List<NguoiHoc> list = selectBySQL(sql, key);
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    private List<NguoiHoc> select(String sql, Object... args) {
+    @Override
+    protected List<NguoiHoc> selectBySQL(String sql, Object... args) {
         List<NguoiHoc> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -100,5 +96,15 @@ public class NguoiHocDAO {
         model.setMaNV(rs.getString("MANV"));
         model.setNgayDK(rs.getDate("NGAYDK"));
         return model;
+    }
+
+    public List<NguoiHoc> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
+        return selectBySQL(sql, "%" + keyword + "%");
+    }
+
+    public List<NguoiHoc> selectByCourse(Integer makh) {
+        String sql = "SELECT * FROM NGUOIHOC WHERE MANH NOT IN (SELECT MANH FROM HOCVIEN WHERE MaKH=?)";
+        return selectBySQL(sql, makh);
     }
 }

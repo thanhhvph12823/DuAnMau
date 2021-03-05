@@ -471,19 +471,19 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniNhanVienActionPerformed
 
     private void mniBangDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniBangDiemActionPerformed
-        openThongKe();
+        openThongKe(0);
     }//GEN-LAST:event_mniBangDiemActionPerformed
 
     private void mniLuongNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLuongNguoiHocActionPerformed
-        openThongKe();
+        openThongKe(1);
     }//GEN-LAST:event_mniLuongNguoiHocActionPerformed
 
     private void mniDiemChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDiemChuyenDeActionPerformed
-        openThongKe();
+        openThongKe(2);
     }//GEN-LAST:event_mniDiemChuyenDeActionPerformed
 
     private void mniDoanhThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoanhThuActionPerformed
-        openThongKe();
+        openThongKe(3);
     }//GEN-LAST:event_mniDoanhThuActionPerformed
 
     private void mniHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHuongDanActionPerformed
@@ -607,7 +607,6 @@ public class EduSysJFrame extends javax.swing.JFrame {
     void openNguoiHoc() {
         if (ShareHelper.authenticated()) {
             closeAllFrame();
-//        new NguoiHocJDialog(this, true).setVisible(true);
             NguoiHocJInternalFrame NHIF = new NguoiHocJInternalFrame();
             centerAllFrame(NHIF);
             NHIF.setVisible(true);
@@ -643,14 +642,14 @@ public class EduSysJFrame extends javax.swing.JFrame {
 
     private void openHuongDan() {
         closeAllFrame();
-
     }
 
-    private void openThongKe() {
+    private void openThongKe(Integer tabIndex) {
         if (ShareHelper.authenticated()) {
             closeAllFrame();
             ThongKeJInternalFrame TKIF = new ThongKeJInternalFrame();
             centerAllFrame(TKIF);
+            TKIF.setSelectedTab(tabIndex);
             TKIF.setVisible(true);
             this.jDesktopPane1.add(TKIF);
         } else {

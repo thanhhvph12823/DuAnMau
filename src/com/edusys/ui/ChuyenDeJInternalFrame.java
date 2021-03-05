@@ -429,14 +429,14 @@ public class ChuyenDeJInternalFrame extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void init() {
-
+        tabs.setSelectedIndex(1);
     }
 
     private void load() {
         DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
         model.setRowCount(0);
         try {
-            List<ChuyenDe> list = dao.select();
+            List<ChuyenDe> list = dao.selectAll();
             for (ChuyenDe cd : list) {
                 Object[] row = {
                     cd.getMaCD(),
@@ -497,7 +497,7 @@ public class ChuyenDeJInternalFrame extends javax.swing.JInternalFrame {
     private void edit() {
         try {
             String macd = (String) tblGridView.getValueAt(this.index, 0);
-            ChuyenDe model = dao.findById(macd);
+            ChuyenDe model = dao.selectByID(macd);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);

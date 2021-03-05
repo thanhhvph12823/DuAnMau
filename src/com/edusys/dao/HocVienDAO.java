@@ -15,8 +15,9 @@ import java.util.List;
  *
  * @author thanhhvph12823
  */
-public class HocVienDAO {
+public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
 
+    @Override
     public void insert(HocVien model) {
         String sql = "INSERT INTO HocVien(MaKH, MaNH, Diem) VALUES(?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
@@ -25,6 +26,7 @@ public class HocVienDAO {
                 model.getDiem());
     }
 
+    @Override
     public void update(HocVien model) {
         String sql = "UPDATE HocVien SET MaKH=?, MaNH=?, Diem=? WHERE MaHV=?";
         JDBCHelper.executeUpdate(sql,
@@ -34,23 +36,20 @@ public class HocVienDAO {
                 model.getMaHV());
     }
 
+    @Override
     public void delete(Integer MaHV) {
         String sql = "DELETE FROM HocVien WHERE MaHV=?";
         JDBCHelper.executeUpdate(sql, MaHV);
     }
 
-    public List<HocVien> select() {
+    @Override
+    public List<HocVien> selectAll() {
         String sql = "SELECT * FROM HocVien";
-        return select(sql);
+        return selectBySQL(sql);
     }
 
-    public HocVien findById(Integer mahv) {
-        String sql = "SELECT * FROM HocVien WHERE MaHV=?";
-        List<HocVien> list = select(sql, mahv);
-        return list.size() > 0 ? list.get(0) : null;
-    }
-
-    private List<HocVien> select(String sql, Object... args) {
+    @Override
+    protected List<HocVien> selectBySQL(String sql, Object... args) {
         List<HocVien> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -67,6 +66,13 @@ public class HocVienDAO {
             throw new RuntimeException(ex);
         }
         return list;
+    }
+
+    @Override
+    public HocVien selectByID(Integer mahv) {
+        String sql = "SELECT * FROM HocVien WHERE MaHV=?";
+        List<HocVien> list = selectBySQL(sql, mahv);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private HocVien readFromResultSet(ResultSet rs) throws SQLException {
